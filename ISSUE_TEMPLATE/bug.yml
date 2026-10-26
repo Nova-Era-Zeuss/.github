@@ -1,0 +1,33 @@
+name: Bug
+description: Comportamento errado em algum ambiente
+title: "bug: "
+labels: ["bug"]
+body:
+  - type: dropdown
+    id: ambiente
+    attributes:
+      label: Ambiente
+      options:
+        - local
+        - desenvolvimento (OCI)
+    validations:
+      required: true
+  - type: textarea
+    id: passos
+    attributes:
+      label: Como reproduzir
+    validations:
+      required: true
+  - type: textarea
+    id: esperado
+    attributes:
+      label: Esperado x obtido
+    validations:
+      required: true
+  - type: input
+    id: versao
+    attributes:
+      label: Versão (SHA da imagem ou commit)
+  - type: markdown
+    attributes:
+      value: "Não cole segredo, token, OCID nem dado de cliente: este template é público."

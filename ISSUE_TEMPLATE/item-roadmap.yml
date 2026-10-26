@@ -1,0 +1,29 @@
+name: Item do roadmap
+description: Trabalho ligado a um item do roadmap do Zeuss 2.0
+title: "[iNNN] "
+labels: ["item"]
+body:
+  - type: input
+    id: item
+    attributes:
+      label: Item
+      description: id do item no roadmap (ex.: i148)
+      placeholder: i148
+    validations:
+      required: true
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo
+      description: O que precisa existir quando o item estiver pronto
+    validations:
+      required: true
+  - type: textarea
+    id: referencias
+    attributes:
+      label: Referências
+      description: PRD, spec, ADR ou trade-off relacionados
+  - type: input
+    id: repos
+    attributes:
+      label: Repositórios afetados

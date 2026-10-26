@@ -1,0 +1,41 @@
+name: ci-node-pnpm
+
+# Workflow reutilizável: instala dependências com pnpm e roda a verificação do repositório.
+on:
+  workflow_call:
+    inputs:
+      node-version:
+        description: Versão do Node
+        type: string
+        default: "22"
+      verify-command:
+        description: Comando de verificação do repositório
+        type: string
+        default: pnpm verify
+      working-directory:
+        description: Pasta do projeto dentro do repositório
+        type: string
+        default: "."
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: ${{ inputs.working-directory }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          package_json_file: ${{ inputs.working-directory }}/package.json
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ inputs.node-version }}
+          cache: pnpm
+          cache-dependency-path: ${{ inputs.working-directory }}/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - run: ${{ inputs.verify-command }}
